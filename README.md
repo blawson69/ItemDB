@@ -6,10 +6,10 @@ ItemDB is currently only for use with the [5e Shaped Sheet](http://github.com/ml
 ## Installation
 Download the `ItemDB.js` and the SRD database `ItemDB-SRD.json` from the project root folder. Add the .js file to the API _before_ adding the .json file to ensure database import.
 
-There are additional database enhancements in the `db enhancements` folder for those who have the requisite compendium upgrades. You can download and add them to the API after the SRD database file. If you own other expansions or rule books that are not included in that folder and wish to include those items, feel free to contact me on a custom database add-on.
+There are additional item databases in the `db enhancements` folder for those who have the requisite compendium upgrades. You can download and add them to the API after the SRD database file. If you own other expansions or rule books that are not included in that folder and wish to include those items, feel free to contact me on a custom database add-on.
 
 ## Show
-The show function `!idb show [item name]` displays information for the item named. The name **is** case sensitive, so sending 'dagger' will not work but 'Dagger' will. Weapons and Armor will display basic stats along with any available descriptions.
+The show function `!idb show [item name]` displays information for the item named. The name **is** case sensitive, so sending 'dagger' will not work but 'Dagger' will. Weapons and Armor will display basic stats along with any available descriptions. All results are whispered.
 ```
 !idb show Breastplate
 !idb show Dagger of Venom
@@ -17,7 +17,7 @@ The show function `!idb show [item name]` displays information for the item name
 ```
 
 ## Add
-The add function allows an item to be added to a designated character. Select items have an option for adding to an alternate section (see [below](#options)). To use, simply send `!idb add [item name]` with the character's token selected.
+The add function allows an item to be added to a designated character. Select items have an option for adding to an alternate section (see [below](#config-options)). To use, simply send `!idb add [item name]` with the character's token selected.
 ```
 !idb add Breastplate
 !idb add Dagger of Venom
@@ -25,16 +25,20 @@ The add function allows an item to be added to a designated character. Select it
 ```
 
 ## Modifications
-Some item names and descriptions have been slightly modified from the SRD or original source to work within the script and provide consistent function for external scripts.
-- Adventuring gear with a container or quantity designated in the name have been changed to separate that information. For example, the "Hempen Rope (50 feet)" is now named "Hempen Rope" and the length is now a note in the description. "Caltrops (bag of 20)" is now "Caltrops" with the quantity in the description. "Acid (Vial)" is simply "Acid".
-- Items such as "Map or Scroll Case" have been broken out into two separate items.
-- Tools, instruments, gaming sets, and spell focus items are all included individually along with the traditional list of adventuring items.
+Some item names and descriptions have been slightly modified from the SRD or original source book to work within the script and provide consistent function for external scripts.
+- Adventuring gear with a container or quantity designated in the name have been changed to remove the extra information. For example, the "Hempen Rope (50 feet)" is now named "Hempen Rope" and the length is now a note in the description. "Caltrops (bag of 20)" is now "Caltrops" with the quantity in the description. "Acid (Vial)" is simply "Acid".
+- Items such as "Map or Scroll Case" have been broken out into two separate items: "Map Case" and "Scroll Case".
 - Items whose name is changed for the SRD have duplicate entries to ensure matches. For instance, "Daern's Instant Fortress" is also listed as "Instant Fortress".
 - Wondrous items with options are listed separately by option, with the option name following a spaced hyphen. For instance, "Bag of Tricks" has three separate listings: "Bag of Tricks - Gray", "Bag of Tricks - Rust" and "Bag of Tricks - Tan".
 
 ## Config Options
-If you wish to allow players to view descriptions of items using the [show command](#show), you can turn this on. This will be honored when ItemDB is used through another script.
+The following settings can be accessed through the config menu `!idb config`:
 
-ItemDB also functions as an enhanced replacement of the [PotionManager](https://github.com/blawson69/PotionManager) and [GearManager](https://github.com/blawson69/GearManager) scripts. As such, you have the option to place certain items in the Offense or Utility sections rather than the Equipment section to give easier access through use of the [Shaped Script](https://github.com/mlenser/roll20-api-scripts/tree/master/5eShapedScript) and its ability to automatically decrement the number of uses on consumable items such as potions, as well as making relevant items such as acid and holy water useable as improvised weapons.
+- If you wish to allow players to view descriptions of items using the [show command](#show), you can turn this on. Honoring this setting may be optional when ItemDB is used by another script.
 
-These settings can be accessed through the config menu `!idb config`.
+- You may want to redirect certain items to more useful areas like Offense or Utility. This allows for ease of access through the respective section macros, rolling of die for healing potions, making relevant items such as acid and holy water useable as improvised weapons, etc. These redirects are off by default. This functions as an enhanced replacement of the (now deprecated) [PotionManager](https://github.com/blawson69/PotionManager) and [GearManager](https://github.com/blawson69/GearManager) scripts.
+
+- You may choose to allow ItemDB to show/add any items not present in the ItemDB database as unknown adventuring gear instead of giving an "item not found" error. This will default the item to a weight of 1 with a description of "Unknown item." and will add the item to the Equipment section.
+
+---
+_This script and its contents are permissible under the Wizards of the Coast's [Fan Content Policy](https://company.wizards.com/fancontentpolicy). Portions of the data used are property of and © Wizards of the Coast LLC._
