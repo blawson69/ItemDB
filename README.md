@@ -4,7 +4,7 @@ This [Roll20](http://roll20.net/) script is a database of items for D&D 5e that 
 ItemDB has two versions: The folder named `Shaped` contains all files for use with the [5e Shaped Sheet](http://github.com/mlenser/roll20-character-sheets/tree/master/5eShaped). These files also have `Shaped` in the name for later identification. The folder `OGL` is for games using the D&D 5E by Roll20 (OGL) sheet and have `OGL` in the name. _Do not mix files from different folders_, as the data is completely different and will break the script.
 
 ## Installation
-Download the `ItemDB-[sheet-name].js` you need along with the appropriate SRD database `SRD-[sheet-name]-IDb.json` from the appropriate folder. Add the .js file to the API _before_ adding the .json file to ensure database import.
+From the appropriate folder, download the `ItemDB-[sheet-name].js` you need along with the appropriate SRD database `SRD-[sheet-name]-IDb.json`. Add the .js file to the API _before_ adding the .json file to ensure database import.
 
 There are additional item databases in the `db enhancements` subfolders for those who have the requisite compendium upgrades. You can download and add them to the API after the SRD database file. If you own other expansions or rule books that are not included in that folder and wish to include those items, feel free to contact me on a custom database add-on.
 

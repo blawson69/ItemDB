@@ -15,7 +15,7 @@ var ItemDB = ItemDB || (function () {
 
     //---- INFO ----//
     var version = '2.0',
-    debugMode = true,
+    debugMode = false,
     styles = {
         box:  'background-color: #fff; border: 1px solid #000; padding: 8px 10px; border-radius: 6px;',
         title: 'padding: 0 0 10px 0; color: ##591209; font-size: 1.5em; font-weight: bold; font-variant: small-caps; font-family: "Times New Roman",Times,serif;',
@@ -169,7 +169,7 @@ var ItemDB = ItemDB || (function () {
                 });
                 setAttrs(char_id, data);
 
-                //*
+                /*
                 setTimeout(function () {
                     // Create Attack entry for item
                     if (item.hasattack && state['ItemDB'].autoAttacks) {
@@ -184,7 +184,7 @@ var ItemDB = ItemDB || (function () {
                         tmp_resource.setWithWorker('current', 1);
                     }
                 }, 500);
-                //*/
+                */
 
             } else {
                 // Update count for existing item
