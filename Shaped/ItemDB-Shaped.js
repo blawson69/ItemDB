@@ -37,7 +37,7 @@ var ItemDB = ItemDB || (function () {
         if (typeof state['ItemDB'].redirectUtility == 'undefined') state['ItemDB'].redirectUtility = false;
         if (typeof state['ItemDB'].addCustom == 'undefined') state['ItemDB'].addCustom = false;
 
-        log('--> ItemDB v' + version + ' <-- Initialized');
+        log('--> ItemDB Shaped v' + version + ' <-- Initialized');
 		if (debugMode) {
 			var d = new Date();
 			showDialog('Debug Mode', 'ItemDB v' + version + ' loaded at ' + d.toLocaleTimeString() + '<br><a style=\'' + styles.textButton + '\' href="!idb config">Show config</a>', 'GM');
@@ -186,10 +186,9 @@ var ItemDB = ItemDB || (function () {
         }
 
         if (!done.success) {
-            if (!item) done.err += '"' + item_name + '" was not found.';
-            if (!char) done.err += ' Character not selected or invalid character ID "' + char_id + '".';
-            done.err = done.err.trim();
-            if (internal) showDialog('Error', done.err, 'GM');
+            if (!item) done.err.push('"' + item_name + '" was not found.');
+            if (!char) done.err.push('Character not selected or invalid character ID "' + char_id + '".');
+            if (internal) showDialog('Error', done.err.join('<br>'), 'GM');
         }
 
         return done;
@@ -564,16 +563,16 @@ var ItemDB = ItemDB || (function () {
         }
 
         message += '<div style=\'' + styles.title + '\'>Player Access</div>';
-        message += 'When turned on, players have access to the "show" command. <a style="' + styles.textButton + '" href="!idb config --toggle-show"> turn ' + (state['ItemDB'].playerShow ? 'off' : 'on') + '</a><br><br>';
+        message += '<a style="' + styles.textButton + '" href="!idb config --toggle-show" title="' + (state['ItemDB'].playerShow ? 'Turn off' : 'Turn on') + '">' + (state['ItemDB'].playerShow ? '✅' : '❎') + '</a> Players ' + (state['ItemDB'].playerShow ? '' : 'do not') + ' have access to the "show" command.<br><br>';
 
         message += '<div style=\'' + styles.title + '\'>Offense Redirect</div>';
-        message += 'When turned on, Offense Redirect will add relevant items to the Offense section to be used as improvised thrown weapons. Included from the SRD: Acid, Alchemist\'s Fire, Holy Water, Oil. <a style="' + styles.textButton + '" href="!idb config --toggle-off"> turn ' + (state['ItemDB'].redirectOffense ? 'off' : 'on') + '</a><br><br>';
+        message += '<a style="' + styles.textButton + '" href="!idb config --toggle-off" title="' + (state['ItemDB'].redirectOffense ? 'Turn off' : 'Turn on') + '">' + (state['ItemDB'].redirectOffense ? '✅' : '❎') + '</a> Relevant items will ' + (state['ItemDB'].redirectOffense ? '' : 'not') + ' be added to the Offense section for use as improvised thrown weapons. Included from the SRD: Acid, Alchemist\'s Fire, Holy Water, Oil. <br><br>';
 
         message += '<div style=\'' + styles.title + '\'>Utility Redirect</div>';
-        message += 'When turned on, Utility Redirect adds certain Adventuring Gear and Wondrous Items to the Utility section. This list includes Potions, Torches, and other consumable items as well as those with a designated number of uses. <a style="' + styles.textButton + '" href="!idb config --toggle-util"> turn ' + (state['ItemDB'].redirectUtility ? 'off' : 'on') + '</a><br><br>';
+        message += '<a style="' + styles.textButton + '" href="!idb config --toggle-util" title="' + (state['ItemDB'].redirectUtility ? 'Turn off' : 'Turn on') + '">' + (state['ItemDB'].redirectUtility ? '✅' : '❎') + '</a> Certain Adventuring Gear and Wondrous Items will ' + (state['ItemDB'].redirectUtility ? '' : 'not') + ' be added to the Utility section. This list includes Potions, Torches, and other consumable items as well as those with a designated number of uses. <br><br>';
 
         message += '<div style=\'' + styles.title + '\'>Unknown Items</div>';
-        message += 'When turned on, items not present in the database will be shown/added as adventuring gear with a "Unknown item" description instead displaying an error. <a style="' + styles.textButton + '" href="!idb config --toggle-add"> turn ' + (state['ItemDB'].addCustom ? 'off' : 'on') + '</a>';
+        message += '<a style="' + styles.textButton + '" href="!idb config --toggle-add" title="' + (state['ItemDB'].addCustom ? 'Turn off' : 'Turn on') + '">' + (state['ItemDB'].addCustom ? '✅' : '❎') + '</a> Items not present in the database will ' + (state['ItemDB'].addCustom ? '' : 'not') + ' be shown/added as adventuring gear with a "Unknown item" description instead displaying an error.';
 
         message += '<hr><p>See the <a style="' + styles.textButton + '" href="https://github.com/blawson69/ItemDB">documentation</a> for complete instructions.</p>';
         showDialog('', message, msg.who);

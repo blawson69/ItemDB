@@ -135,7 +135,7 @@ var ItemDB = ItemDB || (function () {
     },
 
     commandAdd = function (cmd, char_id, internal = false) {
-        var err = [], done = true;
+        var done = {success:true, err: ''};
         if (typeof state['ItemDB'].data.name == 'undefined') {
             if (internal) showDialog('Error', 'No database found! Please upload an ItemDB database to the API and restart the sandbox.', who);
             else err.push('No database found! Please upload an ItemDB database to the API and restart the sandbox.');
@@ -169,14 +169,15 @@ var ItemDB = ItemDB || (function () {
                 });
                 setAttrs(char_id, data);
 
-                /*
                 setTimeout(function () {
+                /*
                     // Create Attack entry for item
                     if (item.hasattack && state['ItemDB'].autoAttacks) {
                         var tmp_attack = findObjs({ type: 'attribute', characterid: char_id, name: 'repeating_inventory_' + rowID + '_hasattack' })[0];
                         //setAttrs(character_id, attribute_obj, settings(optional))
                         tmp_attack.setWithWorker('current', 1);
                     }
+                    */
 
                     // Create Resource entry for item
                     if (item.useasresource && state['ItemDB'].autoResources) {
@@ -184,7 +185,6 @@ var ItemDB = ItemDB || (function () {
                         tmp_resource.setWithWorker('current', 1);
                     }
                 }, 500);
-                */
 
             } else {
                 // Update count for existing item
@@ -197,10 +197,10 @@ var ItemDB = ItemDB || (function () {
                 showDialog('', item.itemname + ' was added to ' + char.get('name') + '\'s inventory.', 'GM');
             }
         } else {
-            if (!item) err.push('"' + item_name + '" was not found.');
-            if (!char) err.push('Character not selected or invalid character ID "' + char_id + '".');
-            if (internal) showDialog('Error', err.join('<br>'), 'GM');
-            done = false;
+            done.success = false;
+            if (!item) done.err.push('"' + item_name + '" was not found.');
+            if (!char) done.err.push('Character not selected or invalid character ID "' + char_id + '".');
+            if (internal) showDialog('Error', done.err.join('<br>'), 'GM');
         }
 
         return done;
@@ -325,16 +325,16 @@ var ItemDB = ItemDB || (function () {
         }
 
         message += '<div style=\'' + styles.title + '\'>Player Access</div>';
-        message += 'When turned on, players have access to the "show" command. <a style="' + styles.textButton + '" href="!idb config --toggle-show"> turn ' + (state['ItemDB'].playerShow ? 'off' : 'on') + '</a><br><br>';
+        message += '<a style="' + styles.textButton + '" href="!idb config --toggle-show" title="' + (state['ItemDB'].playerShow ? 'Turn off' : 'Turn on') + '">' + (state['ItemDB'].playerShow ? '✅' : '❎') + '</a> Players ' + (state['ItemDB'].playerShow ? '' : 'do not') + ' have access to the "show" command.<br><br>';
 
-        message += '<div style=\'' + styles.title + '\'>Auto Attacks</div>';
-        message += 'When turned on, items that have an attack will automatically have an entry in the Attacks and Spellcasting section created. This includes improvised weapons such as Acid, Holy Water, and Oil. <a style="' + styles.textButton + '" href="!idb config --toggle-atks"> turn ' + (state['ItemDB'].autoAttacks ? 'off' : 'on') + '</a><br><br>';
+        //message += '<div style=\'' + styles.title + '\'>Auto Attacks</div>';
+        //message += '<a style="' + styles.textButton + '" href="!idb config --toggle-atks" title="' + (state['ItemDB'].autoAttacks ? 'Turn off' : 'Turn on') + '">' + (state['ItemDB'].autoAttacks ? '✅' : '❎') + '</a>Items that have an attack will ' + (state['ItemDB'].autoAttacks ? '' : 'not') + ' automatically have an entry in the Attacks and Spellcasting section created. This includes improvised weapons such as Acid, Holy Water, and Oil.<br><br>';
 
         message += '<div style=\'' + styles.title + '\'>Auto Resources</div>';
-        message += 'When turned on, items that are used as a resource will automatically have a Resource created. This includes items such as ammunition and potions. <a style="' + styles.textButton + '" href="!idb config --toggle-recs"> turn ' + (state['ItemDB'].autoResources ? 'off' : 'on') + '</a><br><br>';
+        message += '<a style="' + styles.textButton + '" href="!idb config --toggle-recs" title="' + (state['ItemDB'].autoResources ? 'Turn off' : 'Turn on') + '">' + (state['ItemDB'].autoResources ? '✅' : '❎') + '</a> Items that are used as a resource will ' + (state['ItemDB'].autoResources ? '' : 'not') + ' automatically have a Resource created. This includes items such as ammunition and potions.<br><br>';
 
         message += '<div style=\'' + styles.title + '\'>Unknown Items</div>';
-        message += 'When turned on, items not present in the database will be shown/added as adventuring gear with a "Unknown item" description instead displaying an error. <a style="' + styles.textButton + '" href="!idb config --toggle-add"> turn ' + (state['ItemDB'].addCustom ? 'off' : 'on') + '</a>';
+        message += '<a style="' + styles.textButton + '" href="!idb config --toggle-add" title="' + (state['ItemDB'].addCustom ? 'Turn off' : 'Turn on') + '">' + (state['ItemDB'].addCustom ? '✅' : '❎') + '</a> Items not present in the database will ' + (state['ItemDB'].addCustom ? '' : 'not') + ' be shown/added as adventuring gear with a "Unknown item" description instead displaying an error.';
 
         message += '<hr><p>See the <a style="' + styles.textButton + '" href="https://github.com/blawson69/ItemDB">documentation</a> for complete instructions.</p>';
         showDialog('', message, msg.who);
