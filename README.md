@@ -23,7 +23,7 @@ The add function allows an item to be added to a designated character. To use, s
 !idb add Dagger of Venom
 !idb add Iron Bands of Bilarro
 ```
-For the Shaped Sheet, select items have an option for adding to an alternate section (see [below](#config-options)). For the OGL sheet, items are added to the Equipment section of the character sheet. If these items have an attack or can be used as a resource, you will currently need to check the appropriate box in the item settings manually one they have been added.
+For the Shaped Sheet, select items have an option for adding to an alternate section (see [below](#config-options)). For the OGL sheet, items are added to the Equipment section of the character sheet. If these items have an attack or can be used as a resource, you will currently need to check the appropriate box in the item settings manually once they have been added.
 
 ## Modifications
 Some item names and descriptions have been slightly modified from the SRD or original source book to work within the script and provide consistent function for external scripts.
