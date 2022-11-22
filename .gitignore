@@ -1,7 +1,12 @@
-
-ItemDB-XGE.js
-ItemDB-non-SRD.js
-ItemDB-SRD.js
-ItemDB-MonsterLoot-SRD.js
-ItemDB-Shaped-plus-OGL.js
-ItemDB-MonsterLoot-non-SRD.js
+JSON Template.js
+OGL/MonsterLoot-non-SRD-OGL-IDb.js
+OGL/MonsterLoot-SRD-OGL-IDb.js
+OGL/non-SRD-OGL-IDb.js
+OGL/SRD-OGL-IDb.js
+OGL/XGE-OGL-IDb.js
+Shaped/MonsterLoot-non-SRD-Shaped-IDb.js
+Shaped/MonsterLoot-SRD-Shaped-IDb.js
+Shaped/non-SRD-Shaped-IDb.js
+Shaped/SRD-Shaped-IDb.js
+Shaped/XGE-Shaped-IDb.js
+.DS_Store
